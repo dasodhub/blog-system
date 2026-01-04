@@ -25,12 +25,15 @@ class PostController extends Controller
     }
 
     public function store(Request $request) {
-        Post::create([
-            'title' => $request->title,
-            'content' => $request->content,
+
+        $validated = $request->validate([
+            'title' => 'required|min:3',
+            'content' => 'required|min:10',
         ]);
 
-        return redirect('/');
+        Post::create($validated);
+
+        return redirect()->route('posts.index')->with('success', 'Post created successfully.');
     }
 
     public function edit (Post $post) {
@@ -38,12 +41,14 @@ class PostController extends Controller
     }
 
     public function update(Request $request, Post $post) {
-        $post->update([
-            'title' => $request->title,
-            'content' => $request->content,
+        $validated = $request->validate([
+            'title' => 'required|min:3',
+            'content' => 'required|min:10',
         ]);
 
-        return redirect()->route('posts.show', $post);
+        $post->update($validated);
+
+        return redirect()->route('posts.show', $post)->with('success', 'Post updated successfully.');
     }
 
     public function destroy(Post $post) {
