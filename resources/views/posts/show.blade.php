@@ -9,6 +9,12 @@
 
      <a href="{{ route('posts.edit', $post) }}">Edit</a>
 
+     <form action="{{ route('posts.destroy', $post) }}" style="margin-top: 10px;">
+        @csrf
+        @method('DELETE')
+        <button type="submit" onclick="return confirm('Are you sure')">Delete</button>
+     </form>
+
      <a href="{{ route('posts.index') }}">Back</a>
 
 @endsection
