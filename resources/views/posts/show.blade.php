@@ -9,7 +9,7 @@
 
      <a href="{{ route('posts.edit', $post) }}">Edit</a>
 
-     <form action="{{ route('posts.destroy', $post) }}" style="margin-top: 10px;">
+     <form action="{{ route('posts.destroy', $post) }}" method="POST" style="margin-top: 10px;">
         @csrf
         @method('DELETE')
         <button type="submit" onclick="return confirm('Are you sure')">Delete</button>
