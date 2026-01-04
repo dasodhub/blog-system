@@ -32,4 +32,17 @@ class PostController extends Controller
 
         return redirect('/');
     }
+
+    public function edit (Post $post) {
+        return view('posts.edit', compact('post'));
+    }
+
+    public function update(Request $request, Post $post) {
+        $post->update([
+            'title' => $request->title,
+            'content' => $request->content,
+        ]);
+
+        return redirect()->route('posts.show', $post);
+    }
 }
